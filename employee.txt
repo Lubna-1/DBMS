@@ -1,0 +1,158 @@
+mysql> select*from employee;
++------+--------+------------+-------------------+------------------+------------+
+| SSN  | name   | department | project_name      | project_location | salary     |
++------+--------+------------+-------------------+------------------+------------+
+| 1112 | Helen  | MCA        | auto atlas        | calicut          | 8659889.00 |
+| 112B | Haein  | MCA        | MedRep            | kochi            |   86589.10 |
+| 113F | dongli | Bsc        | smart villa       | kannur           |   24367.00 |
+| 165F | alen   | trading    | sales             | Hyderabad        |   24977.00 |
+| 1234 | Gopi   | HR         | medical system    | chennai          |   24977.00 |
+| 1434 | lubna  | HR         | management        | Delhi            |   24977.89 |
+| 14KL | anita  | production | market control    | Mumbai           |    2476.90 |
+| 156L | daisy  | finance    | vehicle control   | goa              |    2476.90 |
+| 153K | remo   | finance    | system management | kasargod         |    5676.09 |
+| 198W | jimny  | marketing  | system control    | kollam           |    5676.88 |
++------+--------+------------+-------------------+------------------+------------+
+10 rows in set (0.00 sec)
+
+mysql> select min(salary)from employee;
++-------------+
+| min(salary) |
++-------------+
+|     2476.90 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select max(salary)from employee;
++-------------+
+| max(salary) |
++-------------+
+|  8659889.00 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select avg(salary)from employee;
++---------------+
+| avg(salary)   |
++---------------+
+| 886208.376172 |
++---------------+
+1 row in set (0.00 sec)
+
+mysql> select salary from employee where salary between 10000 and 40000;
++----------+
+| salary   |
++----------+
+| 24367.00 |
+| 24977.00 |
+| 24977.00 |
+| 24977.89 |
++----------+
+4 rows in set (0.02 sec)
+
+mysql> select department from employee where department in('HR','production','finance');
++------------+
+| department |
++------------+
+| HR         |
+| HR         |
+| production |
+| finance    |
+| finance    |
++------------+
+5 rows in set (0.04 sec)
+
+mysql> select*from employee where department in('HR','production','finance');
++------+-------+------------+-------------------+------------------+----------+
+| SSN  | name  | department | project_name      | project_location | salary   |
++------+-------+------------+-------------------+------------------+----------+
+| 1234 | Gopi  | HR         | medical system    | chennai          | 24977.00 |
+| 1434 | lubna | HR         | management        | Delhi            | 24977.89 |
+| 14KL | anita | production | market control    | Mumbai           |  2476.90 |
+| 156L | daisy | finance    | vehicle control   | goa              |  2476.90 |
+| 153K | remo  | finance    | system management | kasargod         |  5676.09 |
++------+-------+------------+-------------------+------------------+----------+
+5 rows in set (0.00 sec)
+
+mysql> select department from employee where department not in('HR','production','finance');
++------------+
+| department |
++------------+
+| MCA        |
+| MCA        |
+| Bsc        |
+| trading    |
+| marketing  |
++------------+
+5 rows in set (0.00 sec)
+
+mysql> select count(department) from employee where department group by department;
+Empty set, 8 warnings (0.06 sec)
+
+mysql> select count(department) from employee group by department;
++-------------------+
+| count(department) |
++-------------------+
+|                 2 |
+|                 1 |
+|                 1 |
+|                 2 |
+|                 1 |
+|                 2 |
+|                 1 |
++-------------------+
+7 rows in set (0.00 sec)
+
+mysql> select count(department) from employee order by department;
++-------------------+
+| count(department) |
++-------------------+
+|                10 |
++-------------------+
+1 row in set (0.00 sec)
+
+mysql>  alter table employee add primary key(SSN);
+Query OK, 0 rows affected (1.73 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc employee;
++------------------+-------------+------+-----+---------+-------+
+| Field            | Type        | Null | Key | Default | Extra |
++------------------+-------------+------+-----+---------+-------+
+| SSN              | varchar(10) | NO   | PRI | NULL    |       |
+| name             | varchar(20) | YES  |     | NULL    |       |
+| department       | varchar(20) | YES  |     | NULL    |       |
+| project_name     | varchar(30) | YES  |     | NULL    |       |
+| project_location | varchar(20) | YES  |     | NULL    |       |
+| salary           | float(10,2) | YES  |     | NULL    |       |
++------------------+-------------+------+-----+---------+-------+
+6 rows in set (0.17 sec)
+
+mysql> alter table employee drop primay key;
+
+Query OK, 10 rows affected (0.87 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> desc employee;
++------------------+-------------+------+-----+---------+-------+
+| Field            | Type        | Null | Key | Default | Extra |
++------------------+-------------+------+-----+---------+-------+
+| SSN              | varchar(10) | NO   |     | NULL    |       |
+| name             | varchar(20) | YES  |     | NULL    |       |
+| department       | varchar(20) | YES  |     | NULL    |       |
+| project_name     | varchar(30) | YES  |     | NULL    |       |
+| project_location | varchar(20) | YES  |     | NULL    |       |
+| salary           | float(10,2) | YES  |     | NULL    |       |
++------------------+-------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql>
+
+
+
+
+
+
+
+
+
