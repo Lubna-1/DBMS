@@ -1,0 +1,265 @@
+mysql> create table dptmt(SS varchar(10),dep_name varchar(20),dep_location varchar(10));
+Query OK, 0 rows affected (0.87 sec)
+
+mysql> insert into dptmt values(111,'MCA','delhi');
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into dptmt values(112,'Msc','chennai');
+Query OK, 1 row affected (0.20 sec)
+
+mysql> insert into dptmt values(113,'BCa','banglore');
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into dptmt values(114,'Bsc','calicut');
+Query OK, 1 row affected (0.13 sec)
+
+mysql> insert into dptmt values(115,'physics','kannur');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into dptmt values(114,'civil','idukki');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into dptmt values(117,'EEE','kottayam');
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into dptmt values(118,'chemistry','kochi');
+Query OK, 1 row affected (0.11 sec)
+
+mysql> insert into dptmt values(119,'MBA','trivandrm');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into dptmt values(129,'social work','goa');
+Query OK, 1 row affected (0.09 sec)
+
+mysql> select*from dptmt;
++------+-------------+--------------+
+| SS   | dep_name    | dep_location |
++------+-------------+--------------+
+| 111  | MCA         | delhi        |
+| 112  | Msc         | chennai      |
+| 113  | BCa         | banglore     |
+| 114  | Bsc         | calicut      |
+| 115  | physics     | kannur       |
+| 114  | civil       | idukki       |
+| 117  | EEE         | kottayam     |
+| 118  | chemistry   | kochi        |
+| 119  | MBA         | trivandrm    |
+| 129  | social work | goa          |
++------+-------------+--------------+
+10 rows in set (0.00 sec)
+
+mysql> select*from employee;
++------+--------+------------+-------------------+------------------+------------+
+| SSN  | name   | department | project_name      | project_location | salary     |
++------+--------+------------+-------------------+------------------+------------+
+| 1112 | Helen  | MCA        | auto atlas        | calicut          | 8659889.00 |
+| 112B | Haein  | MCA        | MedRep            | kochi            |   86589.10 |
+| 113F | dongli | Bsc        | smart villa       | kannur           |   24367.00 |
+| 1234 | Gopi   | HR         | medical system    | chennai          |   24977.00 |
+| 1434 | lubna  | HR         | management        | Delhi            |   24977.89 |
+| 14KL | anita  | production | market control    | Mumbai           |    2476.90 |
+| 153K | remo   | finance    | system management | kasargod         |    5676.09 |
+| 156L | daisy  | finance    | vehicle control   | goa              |    2476.90 |
+| 165F | alen   | trading    | sales             | Hyderabad        |   24977.00 |
+| 198W | jimny  | marketing  | system control    | kollam           |    5676.88 |
++------+--------+------------+-------------------+------------------+------------+
+10 rows in set (0.01 sec)
+
+mysql> alter table dptmt add primary key(SS);
+ERROR 1062 (23000): Duplicate entry '114' for key 'dptmt.PRIMARY'
+mysql> select distinct SS from dptmt;
++------+
+| SS   |
++------+
+| 111  |
+| 112  |
+| 113  |
+| 114  |
+| 115  |
+| 117  |
+| 118  |
+| 119  |
+| 129  |
++------+
+9 rows in set (0.01 sec)
+
+mysql> alter table dptmt add primary key(SS);
+ERROR 1062 (23000): Duplicate entry '114' for key 'dptmt.PRIMARY'
+mysql> desc dptmt;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| SS           | varchar(10) | YES  |     | NULL    |       |
+| dep_name     | varchar(20) | YES  |     | NULL    |       |
+| dep_location | varchar(10) | YES  |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+3 rows in set (0.07 sec)
+
+mysql> select*from dptmt;
++------+-------------+--------------+
+| SS   | dep_name    | dep_location |
++------+-------------+--------------+
+| 111  | MCA         | delhi        |
+| 112  | Msc         | chennai      |
+| 113  | BCa         | banglore     |
+| 114  | Bsc         | calicut      |
+| 115  | physics     | kannur       |
+| 114  | civil       | idukki       |
+| 117  | EEE         | kottayam     |
+| 118  | chemistry   | kochi        |
+| 119  | MBA         | trivandrm    |
+| 129  | social work | goa          |
++------+-------------+--------------+
+10 rows in set (0.00 sec)
+
+
+mysql> create table orders(order_id varchar(10),customer_id varchar(10),customer_name varchar(20),order_date date);
+Query OK, 0 rows affected (0.51 sec)
+
+
+mysql> insert into orders values(101,'10A','helen','2024-02-20');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into orders values(101,'10A','helen','2024-03-23');
+Query OK, 1 row affected (0.08 sec)
+
+mysql> insert into orders values(101,'10A','helen','2024-08-25');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into orders values(102,'10B','aifa','2023-07-24');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into orders values(103,'10C','alan','2023-09-20');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into orders values(104,'10D','alan','2024-03-23');
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into orders values(105,'10E','sofia','2024-10-26');
+Query OK, 1 row affected (0.07 sec)
+
+mysql> select*from orders;
++----------+-------------+---------------+------------+
+| order_id | customer_id | customer_name | order_date |
++----------+-------------+---------------+------------+
+| 101      | 10A         | helen         | 2024-02-20 |
+| 101      | 10A         | helen         | 2024-03-23 |
+| 101      | 10A         | helen         | 2024-08-25 |
+| 102      | 10B         | aifa          | 2023-07-24 |
+| 103      | 10C         | alan          | 2023-09-20 |
+| 104      | 10D         | alan          | 2024-03-23 |
+| 105      | 10E         | sofia         | 2024-10-26 |
++----------+-------------+---------------+------------+
+7 rows in set (0.00 sec)
+
+mysql> select distinct order_id from orders;
++----------+
+| order_id |
++----------+
+| 101      |
+| 102      |
+| 103      |
+| 104      |
+| 105      |
++----------+
+5 rows in set (0.00 sec)
+
+mysql> select*from orders;
++----------+-------------+---------------+------------+
+| order_id | customer_id | customer_name | order_date |
++----------+-------------+---------------+------------+
+| 101      | 10A         | helen         | 2024-02-20 |
+| 101      | 10A         | helen         | 2024-03-23 |
+| 101      | 10A         | helen         | 2024-08-25 |
+| 102      | 10B         | aifa          | 2023-07-24 |
+| 103      | 10C         | alan          | 2023-09-20 |
+| 104      | 10D         | alan          | 2024-03-23 |
+| 105      | 10E         | sofia         | 2024-10-26 |
++----------+-------------+---------------+------------+
+7 rows in set (0.00 sec)
+
+mysql> create table product(pro_id varchar(10),pro_name varchar(20),order_id varchar(10));
+Query OK, 0 rows affected (0.49 sec)
+
+mysql> insert into product values(001,'keyboard',102);
+Query OK, 1 row affected (0.12 sec)
+
+mysql> insert into product values(002,'PS4',103);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into product values(003,'bicycle',104);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into product values(004,'mouse',105);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into product values(005,'pen',106);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> select*from product;
++--------+----------+----------+
+| pro_id | pro_name | order_id |
++--------+----------+----------+
+| 1      | keyboard | 102      |
+| 2      | PS4      | 103      |
+| 3      | bicycle  | 104      |
+| 4      | mouse    | 105      |
+| 5      | pen      | 106      |
++--------+----------+----------+
+5 rows in set (0.00 sec)
+
+mysql> delete from orders where order_id='101';
+Query OK, 3 rows affected (0.10 sec)
+
+mysql> select*from orders;
++----------+-------------+---------------+------------+
+| order_id | customer_id | customer_name | order_date |
++----------+-------------+---------------+------------+
+| 102      | 10B         | aifa          | 2023-07-24 |
+| 103      | 10C         | alan          | 2023-09-20 |
+| 104      | 10D         | alan          | 2024-03-23 |
+| 105      | 10E         | sofia         | 2024-10-26 |
++----------+-------------+---------------+------------+
+4 rows in set (0.00 sec)
+
+mysql> insert into orders values(101,'10G','dolu','2022-11-30');
+Query OK, 1 row affected (0.13 sec)
+
+mysql> select*from orders;
++----------+-------------+---------------+------------+
+| order_id | customer_id | customer_name | order_date |
++----------+-------------+---------------+------------+
+| 102      | 10B         | aifa          | 2023-07-24 |
+| 103      | 10C         | alan          | 2023-09-20 |
+| 104      | 10D         | alan          | 2024-03-23 |
+| 105      | 10E         | sofia         | 2024-10-26 |
+| 101      | 10G         | dolu          | 2022-11-30 |
++----------+-------------+---------------+------------+
+5 rows in set (0.00 sec)
+
+mysql> select*from product;
++--------+----------+----------+
+| pro_id | pro_name | order_id |
++--------+----------+----------+
+| 1      | keyboard | 102      |
+| 2      | PS4      | 103      |
+| 3      | bicycle  | 104      |
+| 4      | mouse    | 105      |
+| 5      | pen      | 106      |
++--------+----------+----------+
+5 rows in set (0.00 sec)
+
+mysql> select orders.order_id,orders.customer_id,orders.customer_name,orders.order_date,product.pro_id,product.pro_name,product.order_id from orders join product on orders.order_id=product.order_id;
++----------+-------------+---------------+------------+--------+----------+----------+
+| order_id | customer_id | customer_name | order_date | pro_id | pro_name | order_id |
++----------+-------------+---------------+------------+--------+----------+----------+
+| 102      | 10B         | aifa          | 2023-07-24 | 1      | keyboard | 102      |
+| 103      | 10C         | alan          | 2023-09-20 | 2      | PS4      | 103      |
+| 104      | 10D         | alan          | 2024-03-23 | 3      | bicycle  | 104      |
+| 105      | 10E         | sofia         | 2024-10-26 | 4      | mouse    | 105      |
++----------+-------------+---------------+------------+--------+----------+----------+
+
+
+
+
+
