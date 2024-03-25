@@ -146,7 +146,97 @@ mysql> desc employee;
 +------------------+-------------+------+-----+---------+-------+
 6 rows in set (0.00 sec)
 
-mysql>
+mysql>mysql> alter table orders add primary key(order_id);
+Query OK, 0 rows affected (1.45 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+
+
+mysql> alter table product add primary key(pro_id);
+Query OK, 0 rows affected (0.98 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc product;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| pro_id   | varchar(10) | NO   | PRI | NULL    |       |
+| pro_name | varchar(20) | YES  |     | NULL    |       |
+| order_id | varchar(10) | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+
+
+
+mysql> desc orders;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| order_id      | varchar(10) | NO   | PRI | NULL    |       |
+| customer_id   | varchar(10) | YES  |     | NULL    |       |
+| customer_name | varchar(20) | YES  |     | NULL    |       |
+| order_date    | date        | YES  |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> alter table product add foreign key(order_id) references orders(order_id);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`sample`.`#sql-147c_b`, CONSTRAINT `product_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`))
+mysql> select*from orders;
++----------+-------------+---------------+------------+
+| order_id | customer_id | customer_name | order_date |
++----------+-------------+---------------+------------+
+| 101      | 10G         | dolu          | 2022-11-30 |
+| 102      | 10B         | aifa          | 2023-07-24 |
+| 103      | 10C         | alan          | 2023-09-20 |
+| 104      | 10D         | alan          | 2024-03-23 |
+| 105      | 10E         | sofia         | 2024-10-26 |
++----------+-------------+---------------+------------+
+5 rows in set (0.01 sec)
+
+mysql> select*from product;
++--------+----------+----------+
+| pro_id | pro_name | order_id |
++--------+----------+----------+
+| 1      | keyboard | 102      |
+| 2      | PS4      | 103      |
+| 3      | bicycle  | 104      |
+| 4      | mouse    | 105      |
+| 5      | pen      | 106      |
++--------+----------+----------+
+5 rows in set (0.00 sec)
+
+mysql> alter table product add foreign key(order_id) references orders(order_id);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`sample`.`#sql-147c_b`, CONSTRAINT `product_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`))
+mysql> select orders.order_id,orders.customer_id,orders.customer_name,orders.order_date,product.pro_id,product.pro_name,product.order_id from orders join product on orders.order_id=product.order_id;
++----------+-------------+---------------+------------+--------+----------+----------+
+| order_id | customer_id | customer_name | order_date | pro_id | pro_name | order_id |
++----------+-------------+---------------+------------+--------+----------+----------+
+| 102      | 10B         | aifa          | 2023-07-24 | 1      | keyboard | 102      |
+| 103      | 10C         | alan          | 2023-09-20 | 2      | PS4      | 103      |
+| 104      | 10D         | alan          | 2024-03-23 | 3      | bicycle  | 104      |
+| 105      | 10E         | sofia         | 2024-10-26 | 4      | mouse    | 105      |
++----------+-------------+---------------+------------+--------+----------+----------+
+4 rows in set (0.02 sec)
+
+
+
+mysql> delete from product where order_id='106';
+Query OK, 1 row affected (0.11 sec)
+
+mysql> alter table product add foreign key(order_id) references orders(order_id);
+Query OK, 4 rows affected (1.62 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> desc product;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| pro_id   | varchar(10) | NO   | PRI | NULL    |       |
+| pro_name | varchar(20) | YES  |     | NULL    |       |
+| order_id | varchar(10) | YES  | MUL | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+3 rows in set (0.04 sec)
 
 
 
